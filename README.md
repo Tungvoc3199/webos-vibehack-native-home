@@ -1,6 +1,6 @@
 # Native Home for LG webOS (rooted TVs)
 
-**Experimental pre-release — not yet power-cycle tested.** This is NOT firmware and will NOT root your TV.
+**SECURITY HOLD — DO NOT INSTALL OR ENABLE THIS VERSION.** Independent Codex review on 2026-10-22 identified a Critical root-level symlink/config trust flaw plus High-severity rollback/mount-validation defects. The scripts remain available for code review only until fixed and re-reviewed. This is NOT firmware and will NOT root your TV.
 
 Rooted LG webOS Home-key redirect to a custom launcher (default: com.gathin.tvhome) via a reversible bind mount. No PC watcher, no firmware flash, and no overwrite of the signed system file.
 
