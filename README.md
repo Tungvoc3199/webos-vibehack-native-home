@@ -18,7 +18,23 @@ Inspired by [OpenLauncher](https://github.com/Shantil-K/OpenLauncher) for webOS 
 
 ## Prepare and enable (root shell on TV)
 
-Audit the scripts and transfer them to a trusted root-only directory on the TV. When the stock file is not already bind-mounted, save the original before modifying anything:
+Audit the scripts and transfer them to a **root-owned, non-group-writable and non-world-writable** directory (including all ancestor directories). The manager refuses insecure source paths, symlinks and unsafe modes. Example, from a verified root shell with the two audited scripts already transferred:
+
+~~~sh
+mkdir -p /home/root/native-home-release
+chmod 700 /home/root/native-home-release
+chown 0:0 /home/root/native-home-release
+cp native-home.sh native-home-hook.sh /home/root/native-home-release/
+chown 0:0 /home/root/native-home-release/*.sh
+chmod 700 /home/root/native-home-release/*.sh
+cd /home/root/native-home-release
+~~~
+
+**Critical trust boundary:** copying files into a root-owned directory does not by itself prove they are genuine. Before executing either script as root, compare the SHA-256 of BOTH copied scripts against trusted release checksums obtained independently from the published GitHub commit/release. If no trustworthy checksum is available, STOP. **Never directly invoke a shell script as root from Downloads, /tmp, SMB shares, or another user-writable location; a script cannot authenticate its own content before its first instruction executes.** The internal source/permissions checks are defense in depth, not a substitute for this staging procedure.
+
+Run the commands below as the root owner, from that trusted source directory. If a power cut leaves a stale /var/lib/webosbrew/.native-home-lock, **never delete it while another operation is running**; investigate and then manually remove the empty lock directory only if the operation has stopped.
+
+When the stock file is not already bind-mounted, save the original before modifying anything:
 
 ~~~sh
 cp /usr/lib/qml/KeyFilters/systemUi.js /tmp/systemUi.original.js
@@ -33,11 +49,11 @@ Replace STOCK_HASH with the actual SHA-256 of your ORIGINAL backup:
 sh native-home.sh status
 sh native-home.sh prepare /tmp/systemUi.original.js STOCK_HASH com.gathin.tvhome
 # Prepared, but DISABLED. No Home changes, no reboot.
-sh native-home.sh enable ./native-home-hook.sh
+sh native-home.sh enable
 # Hook staged for the next boot; does not reboot or restart the GUI.
 ~~~
 
-**Do not reboot until Developer Mode/root persistence is safely migrated and root SSH recovery is tested.** On reboot the hook checks ownership-independent hashes, presence of the app, Homebrew root and that the stock KeyFilters file is unmodified. If a precondition fails it exits without changing the mapping.
+**Do not reboot until Developer Mode/root persistence is safely migrated and root SSH recovery is tested.** On reboot the hook checks root ownership and permissions, cryptographic hashes, presence of the app, Homebrew root and that the stock KeyFilters file is unmodified. If a precondition fails it exits without changing the mapping.
 
 ## Rollback
 
@@ -46,10 +62,10 @@ sh native-home.sh status
 sh native-home.sh disable
 # Prevent next-boot remapping; does not change the current session.
 sh native-home.sh rollback
-# Unmounts only a mount that looks like THIS tool's source.
+# Disables future boot mapping; does NOT unmount live Home.
 ~~~
 
-If another implementation already mounted Home, rollback refuses to unmount that other implementation. The original backup remains intact.
+This tool deliberately does not hot-unmount a running Home mapping: while a file bind mount is active, the underlying stock file cannot be reliably pre-verified. After disable/rollback, verify your secure root recovery channel, then conduct a controlled reboot to restore stock Home. Other launchers' mounts are never removed.
 
 ## Important limitations
 
@@ -60,7 +76,7 @@ If another implementation already mounted Home, rollback refuses to unmount that
 
 ## Tiếng Việt
 
-Đây là công cụ thử nghiệm cho TV **đã root**, không phải firmware. Phải cài và kiểm tra giao diện webos-vibehack riêng. Cần sao lưu đúng file Home gốc của TV, kiểm tra SHA-256 và có SSH root an toàn. Lệnh prepare chỉ tạo bản vá chưa kích hoạt. Lệnh enable cài hook khởi động nhưng **không reboot**. Chỉ reboot sau khi có phương án khôi phục và xử lý xung đột LG Developer Mode. Lệnh disable và rollback giúp quay về Home LG gốc khi điều kiện cho phép.
+Đây là công cụ thử nghiệm cho TV **đã root**, không phải firmware. Phải cài và kiểm tra giao diện webos-vibehack riêng. Cần sao lưu đúng file Home gốc của TV, kiểm tra SHA-256 và có SSH root an toàn. Lệnh prepare chỉ tạo bản vá chưa kích hoạt. Lệnh enable cài hook khởi động nhưng **không reboot**. Chỉ reboot sau khi có phương án khôi phục và xử lý xung đột LG Developer Mode. Lệnh disable và rollback chỉ tắt hook lần khởi động sau, không tháo bind mount nóng. Cần kiểm chứng SSH root/khả năng khôi phục trước khi reboot để trở lại Home LG gốc.
 
 ## Credits
 
