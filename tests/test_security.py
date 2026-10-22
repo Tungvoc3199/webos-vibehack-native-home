@@ -50,6 +50,14 @@ class SecurityRegressions(unittest.TestCase):
         self.assertIn("mount_count", MANAGER)
         self.assertNotIn('*/native-home/patched-systemUi.js)', MANAGER)
 
+    def test_homebrew_failsafe_flag_is_not_a_normal_boot_blocker(self):
+        # Homebrew startup sets the failsafe marker before run-parts and
+        # clears it *after* init.d hooks; its failsafe branch skips run-parts.
+        # A hook-side marker check would therefore skip every normal boot.
+        boot = MANAGER.split("boot() {", 1)[1].split("usage() {", 1)[0]
+        self.assertNotIn('[ ! -e /var/luna/preferences/webosbrew_failsafe ]', boot)
+        self.assertIn('own_hook || stop', boot)
+
     def test_bounded_boot_retry(self):
         self.assertIn('"$i" -lt 10', MANAGER)
         self.assertIn('sleep 2', MANAGER)

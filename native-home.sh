@@ -104,7 +104,10 @@ own_hook() {
 boot() {
   root; acquire_lock; state_ok
   [ ! -e "$BASE/disabled" ] || { say "disabled"; return 0; }
-  [ ! -e /var/luna/preferences/webosbrew_failsafe ] || { say "failsafe"; return 0; }
+  # Homebrew startup.sh temporarily creates webosbrew_failsafe before
+  # run-parts and clears it afterward on a NORMAL boot. On an actual
+  # failsafe boot, startup.sh does not execute user init.d hooks at all.
+  # Therefore checking this flag HERE would disable every normal boot.
   own_hook || stop "boot hook replaced"
   APP=/media/developer/apps/usr/palm/applications/$APP_ID/appinfo.json
   i=0
