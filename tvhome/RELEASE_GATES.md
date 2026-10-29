@@ -1,20 +1,22 @@
-# V3.2.6 release status
+# V3.2.6 release gates — SECURITY BLOCK
+
+**Independent read-only verdict 29 October 2026: BLOCK (P0=0, P1=6).** See `V326_SECURITY_REVIEW_VI.md`.
 
 | Gate | Status | Evidence |
 |---|---|---|
-| Official LG SDK package check/build | PASS offline | `ares-package --check`, `--no-minify` |
-| Source vs IPK exact inventory | PASS offline | 117/117 files, SHA-256 `ecefbd13453f0fa1d539d708b390740abef30d9cd2bc3b7a3e0d12934ef7aa01` |
-| Four built-in wallpaper images | PASS offline | 1920×1080 JPEG, SHA hashes in `app/wallpapers/presets/manifest.json` |
-| Personal family photo excluded | PASS offline | No `wallpapers/custom.jpg` in 117 IPK files |
-| Preset selection + reload | PASS offline | Four Playwright browser cases |
-| Manual IP/QR and 15-minute PIN mock | PASS offline | QR expiry / gallery mock |
-| Security review V3.2.6 | **PENDING** | No independent APPROVE |
-| webOS22 LS2 service, UID/ACL and rollback | **BLOCKED** | No authorized on-device runtime evidence |
-| Physical TV/iPhone/Magic Remote/CEC | **NOT TESTED** | No V3.2.6 physical canary |
-| Third-party icon/banner/font licenses | **UNKNOWN** | Media binaries excluded from GitHub preview |
-| Official LG Content Store approval | **NOT SUBMITTED** | Requires Seller Lounge QA |
-| GitHub public installable release | **NO-GO** | Do not attach IPK or recommend installation |
+| Official SDK check/build | PASS offline | LG `ares-package --check` + `--no-minify` |
+| 117 files match the private IPK | PASS offline | SHA256 `ecefbd13453f0fa1d539d708b390740abef30d9cd2bc3b7a3e0d12934ef7aa01` |
+| Four original bundled 1920x1080 backgrounds | PASS offline | `app/wallpapers/presets/manifest.json` |
+| Owner family photo omitted | PASS offline | No `wallpapers/custom.jpg` in IPK |
+| Preset selection/reload | PASS offline | Four Playwright tests |
+| LAN IP, QR and PIN expiry mock | PASS offline | Gallery and 15-minute QR expiry |
+| IPK file mode hardening | **P1 BLOCK** | directories 0777, executable source/assets 0666 |
+| Rights & license provenance | **P1 BLOCK** | confidential candidate in private IPK, logos/icons/banner rights unverified, service UNLICENSED |
+| LAN photo confidentiality | **P1 BLOCK** | HTTP carries PIN/photo without transport encryption |
+| Photo deletion/data retention UX | **P1 BLOCK** | no delete-one/delete-all and data policy |
+| Health/version attestation | **P1 BLOCK** | health says 3.1-candidate, IPK 3.2.6 |
+| Physical webOS22, LS2, rollback, signing and UX | **P1 BLOCK** | not demonstrated |
+| LG Content Store certification | NOT SUBMITTED | LG approval not implied |
+| Installable public GitHub Release / commercial sale | **NO-GO** | do not publish binary |
 
-The test wallpaper assets in this tree were locally generated *alternatives* following the same four visual themes. They are **not byte-identical** to the AI images previously rendered in ChatGPT.
-
-Prior verified installed version on owner's TV remains V3.2.0 (historical; not newly read). Native Home, boot, KeyFilters, SAM and InputHook remain NO-GO and outside this app.
+The public PR is a **source-only draft**, not a commercial distribution. Rooted native Home/InputHook/KeyFilters system changes are completely out of scope.
