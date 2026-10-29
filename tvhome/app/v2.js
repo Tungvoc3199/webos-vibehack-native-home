@@ -49,13 +49,16 @@
     toast.timer=setTimeout(function () { el.classList.remove('shown'); },2300);
   }
   function updatePhoto() {
-    var choice='custom';
-    try { choice=localStorage.getItem(WALLPAPER) || 'custom'; } catch (e) {}
+    var choice='preset:aurora_lake';
+    try { choice=localStorage.getItem(WALLPAPER) || choice; } catch (e) {}
+    var matched=(window.TVHOME_PRESETS||[]).filter(function(x){return choice==='preset:'+x.id;})[0];
+    var builtin=(window.TVHOME_PRESETS||[]).filter(function(x){return x.id===window.TVHOME_DEFAULT_PRESET;})[0];
+    var builtinUrl=matched ? matched.file : builtin ? builtin.file : '';
     $('wallpaper').style.backgroundImage = choice === 'night' ?
       'linear-gradient(125deg,#0c1931,#12243d,#060914)' :
       choice === 'warm' ? 'linear-gradient(135deg,#352d2a,#615047,#161b21)' :
       choice === 'default' ? 'linear-gradient(140deg,#162032,#1d2634)' :
-      "url('wallpapers/custom.jpg')";
+      builtinUrl ? 'url("'+builtinUrl+'")' : 'linear-gradient(145deg,#07213d,#182b50,#050816)';
     var d=pref.dim/100;
     $('shade').style.background='linear-gradient(180deg,rgba(3,9,20,'+Math.min(.88,d+.14)+') 0%,'+
       'rgba(3,9,20,'+(d*.34)+') 30%,rgba(3,9,20,.04) 48%,'+
@@ -241,7 +244,7 @@
   function openSettings() {
     showDialog('Cài đặt Apple TV Lite',
       'Quản lý ứng dụng, hình nền và chế độ hiển thị',
-      [{label:'Ảnh nền gia đình',act:'wallpaper'},
+      [{label:'Kho hình nền có sẵn',act:'wallpaper-v31'},
        {label:'Quản lý và gửi ảnh nền từ iPhone',act:'wallpaper-v31'},
        {label:'Nền tối Midnight',act:'night'},
        {label:'Nền tối Warm Slate',act:'warm'},
@@ -291,9 +294,9 @@
     if(action==='wallpaper-v31'){
       closeDialog();if(window.WALLPAPER_V31)window.WALLPAPER_V31.open();return;
     }
-    if(action==='wallpaper'||action==='night'||action==='warm'){
+    if(action==='night'||action==='warm'){
       if(window.WALLPAPER_V31)window.WALLPAPER_V31.clearSelected();
-      try{localStorage.setItem(WALLPAPER,action==='wallpaper'?'custom':action);}catch(e){}
+      try{localStorage.setItem(WALLPAPER,action);}catch(e){}
       updatePhoto();closeDialog();toast('Đã đổi hình nền');return;
     }
     if(action==='dim-up'||action==='dim-down'){

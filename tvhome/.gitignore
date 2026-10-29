@@ -1,4 +1,4 @@
-# Never commit private or distributable build artifacts here.
+# Unreviewed binary packages and personal files must never be committed.
 node_modules/
 dist/
 *.ipk
@@ -10,7 +10,8 @@ dist/
 .env
 .env.*
 *.sqlite*
-/app/wallpapers/
+/app/wallpapers/custom.jpg
+/app/wallpapers/*.jpg
 /app/dock-icons/
 /app/banners/
 /app/icons/

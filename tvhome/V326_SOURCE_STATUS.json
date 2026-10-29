@@ -1,0 +1,15 @@
+{
+  "version": "3.2.6",
+  "phase": "PUBLIC_SOURCE_PREVIEW_NOT_INSTALLABLE_RELEASE",
+  "source": "F:/TV-LG/vibehack/candidate/tvhome-macos-v326-wallpaper-presets-20261029",
+  "ipkSha256PrivateBuild": "ecefbd13453f0fa1d539d708b390740abef30d9cd2bc3b7a3e0d12934ef7aa01",
+  "packageFiles": 117,
+  "iconAssetsInPublicRepo": false,
+  "bannerAssetsInPublicRepo": false,
+  "builtinWallpaperAssetsInPublicRepo": true,
+  "privatePhotoInPublicRepo": false,
+  "independentReview": "PENDING",
+  "physicalTvTests": "NOT_PERFORMED",
+  "commercialRelease": "NO_GO",
+  "mainUnchanged": true
+}

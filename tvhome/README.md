@@ -1,31 +1,21 @@
-# TV Home — webOS launcher source snapshot (3.2.5 RC)
+# TV Home — webOS TV launcher V3.2.6 (public source preview)
 
-> **SOURCE REVIEW ONLY — NOT A DOWNLOAD, INSTALLER, APPROVED RELEASE OR LG CONTENT STORE APP.**
+> **EXPERIMENTAL SOURCE REVIEW SNAPSHOT. NOT A STABLE RELEASE OR CERTIFIED IPK.**
 
-This folder contains the text-source snapshot of an independently developed webOS TV launcher and its private wallpaper receiver service. It combines a slim dock, keyboard/Magic Remote navigation, launcher UI, and LAN-only phone-to-TV wallpaper pairing.
+The `tvhome/` folder contains a proposed webOS TV launcher application and its private local-network wallpaper service, separate from the repository's native Home/root hooks.
 
-**Status (29 October 2026):** the official LG packaging tool built V3.2.5 and the locally packaged 112 payload files matched the local source. Four offline browser UI regressions passed. Physical TV E2E, independently approved deployment/rollback, final security review, product licensing and LG certification **remain open**. The last independently verified installed TV build is V3.2.0.
+## V3.2.6 improvements
+- Four **included** original, 1920×1080 local wallpaper assets (Aurora Lake, Sunrise Ocean, Misty Mountains, Amber/Teal), selected offline without an Internet connection.
+- On new installations the default choice is Aurora Lake; changes survive closing and reopening the app.
+- A photo-upload interface on the TV shows a QR code and temporary 6-digit PIN with a TV-reported local IP address. On an iPhone on the same LAN, opening Safari at the shown address lets the user submit a photo, then accept it by choosing **Áp dụng** on the TV; previously applied pictures are listed in the TV's private gallery.
+- Local-only UI mock tests passed for preset selection/persistence and the 15-minute pairing/QR expiry.
+- Existing 25 icon/banner *references* remain in text source. **Their actual binary files are excluded** pending license clearance.
 
-## What is in GitHub
+## Build limitations
+The local privately packaged IPK SHA-256 was `ecefbd13453f0fa1d539d708b390740abef30d9cd2bc3b7a3e0d12934ef7aa01`, with 117 exact source-matching payload files. **That IPK is not uploaded to this repository** because independent security review, device E2E and distribution gates are still outstanding.
 
-- `app/`: JavaScript, HTML, CSS, app metadata and MIT-licensed QR generator with its notice.
-- `service/`: webOS JS Service wrapper, wallpaper receiver, phone upload form, service metadata. The service includes a private LS2 stop command for eventual bounded rollback.
-- `test_v324_service_lifecycle_offline.js`: offline VM-only state-machine regression for start/stop behavior; run from this folder using Node.js.
+Source cannot reproduce the exact IPK without additional properly licensed app icon, banners, other media and JS dependencies. Do not publish or install a binary based only on this preview.
 
-## Intentionally excluded
+This project does not claim affiliation with Apple or LG; the native Home/InputHook/KeyFilters work at the repository root is a separate security-held track.
 
-The GitHub folder **does not contain** any owner/family wallpaper, actual downloaded app icons or banners, fonts, app package binary (IPK), third-party `node_modules`, device addresses, SSH material, pairing tokens, system Home hooks or on-device backups. Consequently **this source-only snapshot is not a reproducible installable IPK** until appropriately licensed replacement assets and dependencies are supplied.
-
-**Important:** the experimental *native Home integration* code at the repository root is a separate, security-held root-device project. This application snapshot does not enable it, replace LG stock Home, bypass firmware protections, or claim a zero-flash hardware Home-key route.
-
-Do not publish an installation command, redistribute an IPK or sell this build until `RELEASE_GATES.md` is cleared.
-
-## Offline check
-
-```sh
-node test_v324_service_lifecycle_offline.js
-```
-
-This test does **not** exercise an actual LG TV, the native Home key, service jail permissions, or real iPhone uploads. See `RELEASE_GATES.md` for blocked evidence.
-
-Product name and visuals are provisional. No affiliation with Apple or LG is claimed.
+Read `USER_GUIDE_VI.md`, `RELEASE_GATES.md`, and `LICENSE_SCOPE.md` before evaluating the prototype.

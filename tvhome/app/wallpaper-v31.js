@@ -15,14 +15,15 @@ var qrTarget=document.getElementById('wallpaperQr');
 var label=document.getElementById('wallpaperPairText');
 var preview=document.getElementById('wallpaperPending');
 var original=document.getElementById('wallpaper');
-var defaults=[
- {label:'Ảnh gia đình đã lưu trong ứng dụng',key:'original'},
+var builtin=(window.TVHOME_PRESETS||[]);
+var defaultPreset=builtin.filter(function(x){return x.id===window.TVHOME_DEFAULT_PRESET;})[0];
+var defaults=builtin.map(function(x){return {label:'Nền có sẵn · '+x.label,key:'preset',id:x.id};}).concat([
  {label:'Nhận ảnh / Quét QR hoặc nhập PIN',key:'pair'},
  {label:'Áp dụng ảnh mới',key:'apply'},
  {label:'Giữ ảnh cũ / Hủy nhận ảnh',key:'discard'},
  {label:'Thư viện ảnh đã lưu trong TV',key:'gallery'},
  {label:'Đóng',key:'close'}
-];
+]);
 var choices=defaults.slice();
 function notify(message){status.textContent=message;}
 function request(path,method){
@@ -53,16 +54,18 @@ function startOnTv(){
    catch(e){if(!done){done=true;clearTimeout(timer);reject(e);}}
  });
 }
-function setDefault(){
+function setPreset(id){
+ var item=builtin.filter(function(x){return x.id===id;})[0];
+ if(!item)return false;
  try{
-   localStorage.setItem('tvhome.wallpaper.choice','custom');
-   localStorage.setItem(CHOICE,'original');
+   localStorage.setItem('tvhome.wallpaper.choice','preset:'+item.id);
+   localStorage.setItem(CHOICE,'preset:'+item.id);
  }catch(e){}
- // Preserve existing V3 family-photo behavior; independent of companion service.
- original.style.backgroundImage="url('wallpapers/custom.jpg')";
+ original.style.backgroundImage='url("'+item.file+'")';
+ return true;
 }
 function clearSelected(){
- try{localStorage.setItem(CHOICE,'original');}catch(e){}
+ try{localStorage.setItem(CHOICE,'preset:'+window.TVHOME_DEFAULT_PRESET);}catch(e){}
 }
 function activateReceiver(){
  return request('/tv/active').then(function(j){
@@ -75,11 +78,22 @@ function activateReceiver(){
  });
 }
 function restoreSelected(){
- var pref='original';
- try{pref=localStorage.getItem(CHOICE)||'original';}catch(e){}
+ var pref='preset:'+window.TVHOME_DEFAULT_PRESET,main=pref;
+ try{
+   pref=localStorage.getItem(CHOICE)||pref;
+   main=localStorage.getItem('tvhome.wallpaper.choice')||main;
+ }catch(e){}
+ // Main background choice is authoritative. Never let stale V31 preference
+ // override Midnight/Warm, or turn an invalid stored path into a file URL.
+ if(main==='night'||main==='warm'||main==='default')return;
+ if(main.indexOf('preset:')===0){
+   var selected=builtin.filter(function(x){return main==='preset:'+x.id;})[0]||defaultPreset;
+   if(selected)original.style.backgroundImage='url("'+selected.file+'")';
+   return;
+ }
  if(pref==='receiver')startOnTv().then(activateReceiver).catch(function(){
-   original.style.backgroundImage="url('wallpapers/custom.jpg')";
-   // Preserve the user's selected preference; the receiver may return after reboot.
+   if(defaultPreset)original.style.backgroundImage='url("'+defaultPreset.file+'")';
+   // Preserve user's receiver preference if service returns after reboot.
  });
 }
 function renderActions(){
@@ -122,7 +136,7 @@ function open(){
    ready=true;notify('Bộ nhận ảnh sẵn sàng. Chọn Nhận ảnh mới để mở mã QR.');
  }).catch(function(){
    ready=false;
-   notify('Bộ nhận ảnh chưa được cài/kích hoạt trên TV. Anh vẫn dùng được ảnh gia đình và nền có sẵn; mục gửi ảnh đang bị khóa an toàn.');
+   notify('Bộ nhận ảnh chưa hoạt động. Bạn vẫn chọn được bốn hình nền có sẵn mà không cần Internet.');
  });
 }
 function close(){
@@ -223,7 +237,10 @@ function runChoice(i){
      notify('Đã chọn ảnh đã lưu từ bộ nhớ TV, không cần tải lại.');
    }).catch(function(e){notify('Không mở được ảnh đã lưu: '+e.message);});return;
  }
- if(action==='original'){setDefault();notify('Đã chọn lại ảnh gia đình có sẵn.');}
+ if(action==='preset'){
+   if(setPreset(choice.id))notify('Đã chọn hình nền '+choice.label+'. Có sẵn trên TV, không cần Internet.');
+   return;
+ }
  if(action==='pair')startPair();
  if(action==='apply')apply();
  if(action==='discard')discard();

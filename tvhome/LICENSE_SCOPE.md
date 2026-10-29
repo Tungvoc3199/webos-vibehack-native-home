@@ -1,13 +1,10 @@
-# Licensing and distribution scope
+# Licensing / rights audit — experimental V3.2.6
 
-The repository root has an MIT license for the original native-home scripts. Do not assume that means all third-party media, firmware content or app-store logos are available for commercial redistribution.
+- `app/wallpapers/presets/*.jpg`: four **new, original local generated backgrounds** without family photos, created specifically for the project. Metadata and SHA256 recorded in manifest.
+- `app/LICENSE_QR_GENERATOR.txt`: preserve existing MIT notice for QR generation.
+- `service/package.json`: currently indicates `UNLICENSED`. Owner must decide standalone service source terms before open distribution.
+- `jpeg-js` and other third-party JS dependencies: follow their applicable license notices; vendor dependency binaries are **not** in this source-only preview.
+- App icons, banners, font files, logos, TV firmware snippets and personal background images excluded pending distribution rights review.
+- Working development references to Apple TV/macOS are not an affiliation or trademark clearance; do not market a commercial product as an Apple product.
 
-- The QR generator includes `LICENSE_QR_GENERATOR.txt` (Kazuhiko Arase, MIT); preserve its notice.
-- The private wallpaper JS Service's `package.json` currently declares `UNLICENSED`. Its standalone distribution terms need an explicit project-owner decision before a broad public release.
-- The local IPK historically carried `jpeg-js` (BSD-3-Clause); this public text snapshot deliberately excludes `node_modules`. Review its notice when creating a distributable build.
-- App-store icons, banners, logos, fonts, wallpapers and all hardware/firmware modifications are excluded because their public redistribution rights have not been established.
-- The names 'Apple TV' and 'macOS' are used only for historical, descriptive development context and must not imply affiliation, authorization or compatibility certification by Apple or LG.
-
-No user family photographs, private keys, tokens or private TV configuration are included.
-
-**This is source for peer review, not an invitation to redistribute an installable package.** Commercial release requires a separate rights and policy review.
+No public end-user IPK license is yet issued. This branch is for source inspection and development collaboration only.

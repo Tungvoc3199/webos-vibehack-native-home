@@ -1,8 +1,8 @@
 {
-    "name":  "com.gathin.tvhome.wallpaper",
-    "version":  "3.2.5",
-    "description":  "Apple TV Lite wallpaper receiver",
-    "main":  "index.js",
-    "private":  true,
-    "license":  "UNLICENSED"
+  "name": "com.gathin.tvhome.wallpaper",
+  "version": "3.2.6",
+  "description": "TV Home private LAN wallpaper receiver",
+  "main": "index.js",
+  "private": true,
+  "license": "UNLICENSED"
 }

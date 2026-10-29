@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>Apple TV Lite V3.2.5 · Native Dock + Ảnh nền</title>
+  <title>Apple TV Lite V3.2.6 · Native Dock + 4 hình nền</title>
   <link rel="stylesheet" href="v2.css">
   <link rel="stylesheet" href="macos.css">
   <link rel="stylesheet" href="dock-v301.css">
@@ -25,7 +25,7 @@
         <button type="button" class="navbtn" data-nav="settings">Cài đặt</button>
       </nav>
     </header>
-    <div class="brandline"><span class="eyebrow">APPLE TV LITE · MACOS EDITION</span><span class="brand-desc">Không gian của gia đình</span><span class="macTagline">Những khoảnh khắc đáng nhớ, ngay trên màn hình lớn.</span></div>
+    <div class="brandline"><span class="eyebrow">TV HOME · NATIVE-INSPIRED EDITION</span><span class="brand-desc">Không gian giải trí của bạn</span><span class="macTagline">Bốn cảnh nền có sẵn · Chọn ảnh riêng từ điện thoại.</span></div>
     <section id="favorites" aria-label="Ứng dụng yêu thích">
       <div class="dock-heading"><h1>Yêu thích</h1><span>Giữ OK để quản lý ứng dụng</span></div>
       <div id="favoriteItems" class="tiles"></div>
@@ -48,18 +48,19 @@
     </section>
   </div>
   <section id="wallpaperManager" class="wallpaper-v31 hidden" aria-label="Quản lý ảnh nền">
-    <h2>Hình nền Apple TV Lite</h2>
-    <p id="wallpaperHelp">Đổi ảnh nền trên TV hoặc gửi ảnh từ iPhone.</p>
+    <h2>Kho hình nền TV Home</h2>
+    <p id="wallpaperHelp">Chọn 1 trong 4 ảnh nền có sẵn hoặc gửi ảnh qua địa chỉ IP của TV.</p>
     <div class="wallpaper-manager-content">
       <div class="wallpaper-manager-options" id="wallpaperActions"></div>
       <div class="wallpaper-manager-preview"><div id="wallpaperQr"></div><p id="wallpaperPairText"></p><img id="wallpaperPending" hidden alt="Xem trước ảnh mới"></div>
     </div>
-    <div id="wallpaperStatus" role="status">Ảnh gia đình vẫn sẵn có nếu dịch vụ nhận ảnh tạm ngừng.</div>
+    <div id="wallpaperStatus" role="status">Bốn hình nền có sẵn hoạt động cả khi TV không có Internet.</div>
   </section>
   <div id="toast" class="toast" role="status"></div>
   <script src="config.js"></script>
   <script src="apps.js"></script>
   <script src="catalog.js"></script>
+  <script src="wallpaper-presets.js"></script>
   <script src="v2.js"></script>
   <script src="macos.js"></script>
   <script src="qr-generator.js"></script>
