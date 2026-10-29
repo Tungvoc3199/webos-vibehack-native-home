@@ -1,0 +1,20 @@
+# Never commit private or distributable build artifacts here.
+node_modules/
+dist/
+*.ipk
+*.zip
+*.tar.gz
+*.log
+*.pem
+*.key
+.env
+.env.*
+*.sqlite*
+/app/wallpapers/
+/app/dock-icons/
+/app/banners/
+/app/icons/
+/app/fonts/
+/app/icon.png
+/app/largeIcon.png
+__pycache__/

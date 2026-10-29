@@ -1,0 +1,15 @@
+{
+  "version": "3.2.5",
+  "status": "SOURCE_ONLY_REVIEW_BRANCH_NO_PUBLIC_BINARY_RELEASE",
+  "sourceScope": "text-source snapshot; media, user data, IPK and node_modules excluded",
+  "previousVerifiedTV": "3.2.0",
+  "localPrivateIPK_SHA256": "510b071ffe6fb3d160313d5a9ef7117f86878af9460b71079f0fa1883f7faca1",
+  "localPrivateRollbackV320_SHA256": "ada5856c9bcd2c9bcfad8ab8f9b7155c39e6dd09b221183eb228be8edb8cec63",
+  "localOfflineUIPass": 4,
+  "localOfflineServiceTestsPreviouslyPassed": 40,
+  "independentReview": "PENDING",
+  "hardwareTests": "NOT_PERFORMED_FOR_V325",
+  "commercialRelease": "NO_GO",
+  "lgSellerLounge": "NOT_SUBMITTED",
+  "sourceOnly": true
+}

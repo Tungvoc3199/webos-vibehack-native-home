@@ -1,0 +1,53 @@
+/* V3.0.3 natural Mac-like dock: a SINGLE full-bleed rounded image face.
+   Original catalog/library, wallpaper, Home/InputHook, GIP unchanged.
+   Override V3.0.1 / V3.0.2 nested backing, padding, artificial card borders. */
+#favorites .tile-image,
+#favorites .tile[data-id] .tile-image{
+ background:transparent!important;
+ border:0!important;
+ outline:0!important;
+ border-radius:30px;
+ box-shadow:0 5px 14px rgba(0,0,0,.26)!important;
+ overflow:visible;
+ transform:translate3d(var(--dock-wave-x,0px),var(--dock-wave-y,0px),0)
+           scale(var(--dock-wave-scale,1))!important;
+ transform-origin:50% 100%;
+ transition:transform 205ms cubic-bezier(.18,.82,.22,1),filter 205ms ease;
+}
+#favorites .tile-image{pointer-events:none}
+#favorites .tile-image img{
+ padding:0!important;
+ width:100%;height:100%;object-fit:cover;
+ border-radius:30px;
+ box-shadow:0 0 0 1px rgba(255,255,255,.18);
+}
+#favorites .tile.focused .tile-image{
+ border:0!important;
+ outline:0!important;
+ box-shadow:0 7px 21px rgba(0,0,0,.46)!important;
+}
+#favorites .tile.focused .tile-image img{
+ box-shadow:0 0 0 2.5px #fff,0 0 0 5px rgba(255,255,255,.23);
+}
+#favorites .tile-library{
+ background:linear-gradient(155deg,#5d80ae,#243f67)!important;
+ border-radius:30px;
+}
+#favorites .tile-title{transition:opacity 140ms ease;bottom:calc(100% + 25px)}
+@media (prefers-reduced-motion:reduce){
+ #favorites .tile-image{transition:none!important}
+ #favorites .tile-title{transition:none!important}
+}
+
+/* When the Magic Remote pointer hovers elsewhere, show only its tooltip. */
+#favorites.dock-pointer-active .tile.focused:not(.dock-hovered) .tile-title{opacity:0}
+#favorites.dock-pointer-active .tile.focused:not(.dock-hovered) .tile-image img{
+ box-shadow:0 0 0 1px rgba(255,255,255,.18)
+}
+#favorites .tile.dock-hovered .tile-image img{
+ box-shadow:0 0 0 2px rgba(255,255,255,.8),0 0 0 4px rgba(255,255,255,.14)
+}
+#favorites .tile.dock-hovered .tile-title{opacity:1}
+#favorites .tile[data-id="__library__"] .tile-image{
+ background:linear-gradient(155deg,#5d80ae,#243f67)!important;
+}
