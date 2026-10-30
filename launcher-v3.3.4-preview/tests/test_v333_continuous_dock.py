@@ -90,8 +90,8 @@ with sync_playwright() as p:
  import json
  a=json.loads((R/"app/appinfo.json").read_text(encoding="utf-8"))
  s=json.loads((R/"service/package.json").read_text(encoding="utf-8"))
- assert a["version"]==s["version"]=="3.3.3"
- assert "3.3.3" in (R/"app/wallpaper-v31.js").read_text(encoding="utf-8")
+ assert a["version"]==s["version"]=="3.3.4"
+ assert "3.3.4" in (R/"app/wallpaper-v31.js").read_text(encoding="utf-8")
  assert not errors,errors
  print("V333_DOCK_REMOTE_E2E_ALL_PASS",flush=True)
  browser.close()

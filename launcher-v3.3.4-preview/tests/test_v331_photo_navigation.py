@@ -11,7 +11,7 @@ with sync_playwright() as p:
         window.V31_RECEIVER_ORIGIN='http://127.0.0.1:9879';
         window.fetch=async function(url,opts){
           var p=String(url),v={ok:true};
-          if(p.includes('/tv/health'))v={ok:true,version:'3.3.3'};
+          if(p.includes('/tv/health'))v={ok:true,version:'3.3.4'};
           return {ok:true,status:200,json:async()=>v};
         };
     })();""")

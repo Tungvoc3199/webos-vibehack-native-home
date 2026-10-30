@@ -9,7 +9,7 @@ with sync_playwright() as p:
  page.add_init_script("""(()=>{
  window.V31_TEST_CONTROL_TOKEN='b'.repeat(64);
  window.V31_RECEIVER_ORIGIN='http://127.0.0.1:9879';
- window.__ver='3.3.3';window.__pairs=0;
+ window.__ver='3.3.4';window.__pairs=0;
  const timer=window.setInterval;
  window.setInterval=function(fn,ms){if(ms===60000)window.__heartbeat=fn;return timer(fn,ms)};
  window.fetch=(url)=>{

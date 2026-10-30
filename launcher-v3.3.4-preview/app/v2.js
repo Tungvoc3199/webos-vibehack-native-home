@@ -258,7 +258,9 @@
   function openSettings() {
     showDialog('Cài đặt TV Home',
       'Quản lý ứng dụng, hình nền và chế độ hiển thị',
-      [{label:'Kho hình nền có sẵn',act:'wallpaper-v31'},
+      [{label:'Thời tiết · chọn địa phương',act:'weather-locations'},
+       {label:'Thời tiết · cập nhật ngay',act:'weather-refresh'},
+       {label:'Kho hình nền có sẵn',act:'wallpaper-v31'},
        {label:'Gửi ảnh từ điện thoại / máy tính bảng',act:'wallpaper-v31'},
        {label:'Nền tối Midnight',act:'night'},
        {label:'Nền tối Warm Slate',act:'warm'},
@@ -308,6 +310,27 @@
         label+'TV Home không có quyền gỡ chương trình. Vào Home LG gốc → Chỉnh sửa danh sách ứng dụng → chọn '+app.title+
         ' → thùng rác → Xác nhận. Chỉ gỡ nếu LG cho phép; đừng xóa ứng dụng hệ thống.',
         [{label:'Đã hiểu',act:'close'}],'info');
+      return;
+    }
+    if(action==='weather-locations'){
+      closeDialog();
+      showDialog('Địa phương thời tiết','Chọn nơi hiển thị thời tiết thực. Có thể đổi bất kỳ lúc nào.',
+        [{label:'Hưng Yên',act:'weather-place-hungyen'},
+         {label:'Hà Nội',act:'weather-place-hanoi'},
+         {label:'Hải Phòng',act:'weather-place-haiphong'},
+         {label:'Đà Nẵng',act:'weather-place-danang'},
+         {label:'TP. Hồ Chí Minh',act:'weather-place-hcm'},
+         {label:'Đóng',act:'close'}],'weather');
+      return;
+    }
+    if(action==='weather-refresh'){
+      closeDialog();
+      if(window.TV_WEATHER_V334)window.TV_WEATHER_V334.refresh(true);
+      return;
+    }
+    if(action.indexOf('weather-place-')===0){
+      closeDialog();
+      if(window.TV_WEATHER_V334)window.TV_WEATHER_V334.setLocation(action.slice(14));
       return;
     }
     if(action==='wallpaper-v31'){

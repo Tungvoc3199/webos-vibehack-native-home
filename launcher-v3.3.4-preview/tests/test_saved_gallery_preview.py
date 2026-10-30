@@ -17,7 +17,7 @@ with sync_playwright() as p:
    window.__testDeleteCalls=0;
    window.fetch=async (url,opts)=>{
      let name=String(url),o={ok:true},code=200;
-     if(name.includes('/tv/health'))o={ok:true,version:'3.3.3'};
+     if(name.includes('/tv/health'))o={ok:true,version:'3.3.4'};
      else if(name.includes('/tv/active'))o={ok:true,active:'111111111111111111111111',photos:[
        {id:'111111111111111111111111',name:'Ảnh từ điện thoại'},
        {id:'222222222222222222222222',name:'Ảnh từ điện thoại'}

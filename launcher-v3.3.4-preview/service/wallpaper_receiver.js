@@ -217,7 +217,7 @@ function route(req,res){
   if(!localIP(ip))return fail(req,res,403,'OPTIONS_DENIED');
   return send(req,res,204,'','text/plain');
  }
- if(req.method==='GET'&&p==='/tv/health')return send(req,res,200,{ok:true,version:'3.3.3'});
+ if(req.method==='GET'&&p==='/tv/health')return send(req,res,200,{ok:true,version:'3.3.4'});
  if(req.method==='POST'&&p==='/tv/pair'){
   if(req.headers['x-tv-launcher']!=='1')return fail(req,res,403,'TV_HEADER_REQUIRED');
   // Do not delete pending uploads when re-opening the TV menu.

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <title>TV Home V3.3.3 · Native Dock + hình nền đa thiết bị</title>
+  <title>TV Home V3.3.4 · Native Dock + hình nền đa thiết bị</title>
   <link rel="stylesheet" href="v2.css">
   <link rel="stylesheet" href="macos.css">
   <link rel="stylesheet" href="dock-v301.css">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="dock-custom-v330.css">
   <link rel="stylesheet" href="perf-v332.css">
   <link rel="stylesheet" href="dock-reorder-v333.css">
+  <link rel="stylesheet" href="weather-v334.css">
 </head>
 <body>
   <div id="wallpaper"></div><div id="shade"></div>
@@ -28,7 +29,13 @@
         <button type="button" class="navbtn" data-nav="settings">Cài đặt</button>
       </nav>
     </header>
-    <div class="brandline"><span class="eyebrow">TV HOME · NATIVE-INSPIRED EDITION</span><span class="brand-desc">Không gian giải trí của bạn</span><span class="macTagline">Bốn cảnh nền có sẵn · Chọn ảnh riêng từ điện thoại.</span></div>
+    <section id="weatherBox" aria-label="Thời tiết thực tế" aria-live="polite">
+      <div id="weatherCity">Hưng Yên</div>
+      <div class="weatherReading"><span id="weatherIcon" aria-hidden="true">☁</span><strong id="weatherTemp">--°</strong></div>
+      <div id="weatherSummary">Đang lấy thời tiết…</div>
+      <div id="weatherDetails">Độ ẩm -- · Mưa --</div>
+      <div id="weatherUpdated">Nguồn: Open-Meteo</div>
+    </section>
     <section id="favorites" aria-label="Ứng dụng yêu thích">
       <div class="dock-heading"><h1>Yêu thích</h1><span>Giữ OK để quản lý ứng dụng</span></div>
       <div id="favoriteItems" class="tiles"></div>
@@ -68,5 +75,6 @@
   <script src="macos.js"></script>
   <script src="qr-generator.js"></script>
   <script src="wallpaper-v31.js"></script>
+  <script src="weather-v334.js"></script>
 </body>
 </html>

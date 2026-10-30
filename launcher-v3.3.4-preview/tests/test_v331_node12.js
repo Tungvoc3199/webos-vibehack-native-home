@@ -52,7 +52,7 @@ function call(method,url,body,extra={}){
   }
   await start(true);
   const health=await call('GET','/tv/health',null,tv);
-  assert.equal(health.status,200);assert.equal(health.body.version,'3.3.3');
+  assert.equal(health.status,200);assert.equal(health.body.version,'3.3.4');
   const p=await call('POST','/tv/pair',null,tv);assert.equal(p.status,200);
   const upload=await call('POST','/upload?t='+p.body.token,jpg,{
    Origin:'http://127.0.0.1:'+port,'Content-Type':'image/jpeg','X-Pair-Code':p.body.code});

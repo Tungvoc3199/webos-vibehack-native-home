@@ -1,0 +1,20 @@
+/* V3.3.4: remove marketing copy at left, keep clock/date and add calm weather. */
+.brandline,#greeting{display:none!important}
+.topclock{width:470px}
+#clock{font-size:91px;letter-spacing:-4px}
+#date{font-size:24px;margin-top:5px}
+#weatherBox{
+ position:absolute;top:343px;left:105px;width:406px;
+ padding:21px 25px 19px;border:1px solid rgba(255,255,255,.28);
+ border-radius:24px;background:rgba(10,23,37,.57);
+ box-shadow:0 12px 36px rgba(0,0,0,.18);
+ color:#f7fbff;text-shadow:0 2px 8px rgba(0,0,0,.53);
+ z-index:3;pointer-events:none;
+}
+#weatherCity{font-size:19px;font-weight:650;letter-spacing:.4px;opacity:.96}
+.weatherReading{display:flex;align-items:center;gap:13px;margin-top:8px;line-height:1.06}
+#weatherIcon{font-size:61px;line-height:1;display:inline-block;width:76px;text-align:center}
+#weatherTemp{font-size:68px;font-weight:480;letter-spacing:-2px}
+#weatherSummary{font-size:22px;font-weight:550;margin-top:5px}
+#weatherDetails{font-size:18px;color:#e4ecf5;margin-top:10px}
+#weatherUpdated{font-size:14px;color:#c3d1df;margin-top:11px;white-space:nowrap}

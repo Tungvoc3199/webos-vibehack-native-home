@@ -1,10 +1,11 @@
 {
-  "latestAppVersion": "3.3.3",
+  "latestAppVersion": "3.3.4",
   "publicationMode": "source-only-preview-not-installable",
-  "tvInstalledVersion": "3.3.1",
-  "newBehavior": "long OK to pick up Dock app, repeat arrows, OK commit, Back cancel; short OK launches",
-  "testSummary": "10/10 UI suites PASS; real Node12 receiver PASS; webOS SDK --check PASS",
-  "files": [
+  "tvInstalledVersion": "3.3.4",
+  "verifiedOnTV": "exact source/package bytes and Homebrew terminal install; weather pixels not yet validated",
+  "behavior": "live HTTPS Open-Meteo weather, 20m refresh, city selection, stale display honesty, left promo copy removed",
+  "tests": "11/11 UI regression PASS; Node12 E2E PASS; webOS SDK check PASS",
+  "sourceFiles": [
     "app/LICENSE_QR_GENERATOR.txt",
     "app/app.js",
     "app/appinfo.json",
@@ -30,6 +31,8 @@
     "app/wallpaper.js",
     "app/wallpapers/presets/manifest.json",
     "app/wave-v303.css",
+    "app/weather-v334.css",
+    "app/weather-v334.js",
     "service/index.js",
     "service/package.json",
     "service/phone.html",
@@ -46,16 +49,17 @@
     "tests/test_v332_health_gate.py",
     "tests/test_v332_hung_heartbeat.py",
     "tests/test_v332_late_pair_gate.py",
-    "tests/test_v333_continuous_dock.py"
+    "tests/test_v333_continuous_dock.py",
+    "tests/test_v334_live_weather.py"
   ],
   "notARelease": true,
   "excluded": [
-    "third-party image/icon files",
-    "wallpaper JPEG files",
-    "Outfit font binary",
+    "third-party assets",
+    "wallpaper JPGs",
+    "font binary",
     "vendored dependencies",
     "compiled IPK",
-    "root installers",
-    "TV/photo personal data"
+    "root installer",
+    "TV secrets/photo data"
   ]
 }

@@ -199,7 +199,7 @@ function refreshService(){
  ready=false;
  startOnTv().then(function(){return request('/tv/health');}).then(function(j){
    if(!on||uiEpoch!==turn||healthSeq!==probe)return;
-   if(j.version!=='3.3.3')throw Error('RECEIVER_VERSION_MISMATCH');
+   if(j.version!=='3.3.4')throw Error('RECEIVER_VERSION_MISMATCH');
    ready=true;
  }).catch(function(e){
    if(!on||uiEpoch!==turn||healthSeq!==probe)return;
@@ -207,7 +207,7 @@ function refreshService(){
    // Never leave a previously issued pairing code visible after health failure.
    resetPair();
    notify(e&&e.message==='RECEIVER_VERSION_MISMATCH'?
-     'Bộ nhận ảnh không khớp V3.3.3. Đã khóa tạo QR/PIN cho đến khi service được cập nhật đồng bộ.':
+     'Bộ nhận ảnh không khớp V3.3.4. Đã khóa tạo QR/PIN cho đến khi service được cập nhật đồng bộ.':
      'Bộ nhận ảnh tạm ngừng. Vui lòng đóng và mở lại màn hình Hình nền.');
  });
 }
@@ -222,13 +222,13 @@ function open(){
  notify('Đang kiểm tra kết nối bộ nhận ảnh trên TV...');
  startOnTv().then(function(){return request('/tv/health');}).then(function(j){
    if(!on||uiEpoch!==turn||healthSeq!==probe)return;
-   if(j.version!=='3.3.3')throw Error('RECEIVER_VERSION_MISMATCH');
-   ready=true;notify('Bộ nhận ảnh V3.3.3 sẵn sàng. Chọn Nhận ảnh để mở QR/IP.');
+   if(j.version!=='3.3.4')throw Error('RECEIVER_VERSION_MISMATCH');
+   ready=true;notify('Bộ nhận ảnh V3.3.4 sẵn sàng. Chọn Nhận ảnh để mở QR/IP.');
  }).catch(function(e){
    if(!on||uiEpoch!==turn||healthSeq!==probe)return;
    ready=false;
    notify(e && e.message==='RECEIVER_VERSION_MISMATCH'?
-      'Bộ nhận ảnh chưa đúng phiên bản 3.3.3. Chức năng gửi ảnh đã được khóa an toàn; vẫn chọn được bốn nền có sẵn.':
+      'Bộ nhận ảnh chưa đúng phiên bản 3.3.4. Chức năng gửi ảnh đã được khóa an toàn; vẫn chọn được bốn nền có sẵn.':
       'Bộ nhận ảnh chưa hoạt động. Bạn vẫn chọn được bốn hình nền có sẵn mà không cần Internet.');
  });
 }

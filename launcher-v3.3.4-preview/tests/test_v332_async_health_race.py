@@ -27,7 +27,7 @@ with sync_playwright() as p:
  page.wait_for_function("window.__healthRequests.length===2")
  page.evaluate("window.__respondHealth(1,'3.3.1')")
  page.wait_for_function("document.querySelector('#wallpaperStatus').textContent.includes('khóa')")
- page.evaluate("window.__respondHealth(0,'3.3.3')")
+ page.evaluate("window.__respondHealth(0,'3.3.4')")
  page.wait_for_timeout(200)
  assert not page.evaluate("WALLPAPER_V31.testState().ready"),"OLD_SUCCESS_BYPASSED_NEW_FAILURE"
  page.get_by_role("button",name="Nhận ảnh / Quét QR hoặc nhập PIN").click()
@@ -35,7 +35,7 @@ with sync_playwright() as p:
  print("R2_DELAYED_OLD_HEALTH_SUCCESS_IGNORED_PASS",flush=True)
  page.evaluate("WALLPAPER_V31.close();WALLPAPER_V31.open()")
  page.wait_for_function("window.__healthRequests.length===3")
- page.evaluate("window.__respondHealth(2,'3.3.3')")
+ page.evaluate("window.__respondHealth(2,'3.3.4')")
  page.wait_for_function("WALLPAPER_V31.testState().ready")
  page.evaluate("window.__heartbeat()")
  page.wait_for_function("window.__healthRequests.length===4")
@@ -43,7 +43,7 @@ with sync_playwright() as p:
  page.wait_for_function("window.__healthRequests.length===5")
  page.evaluate("window.__respondHealth(4,'3.3.1')")
  page.wait_for_function("document.querySelector('#wallpaperStatus').textContent.includes('khóa')")
- page.evaluate("window.__respondHealth(3,'3.3.3')")
+ page.evaluate("window.__respondHealth(3,'3.3.4')")
  page.wait_for_timeout(200)
  assert not page.evaluate("WALLPAPER_V31.testState().ready"),"OLD_HEARTBEAT_BYPASSED_NEW_FAILURE"
  print("R2_DELAYED_OLD_HEARTBEAT_SUCCESS_IGNORED_PASS",flush=True)
