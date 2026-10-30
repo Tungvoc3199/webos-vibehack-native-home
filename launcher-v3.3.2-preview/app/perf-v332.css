@@ -1,0 +1,33 @@
+/* V3.3.2 candidate only: reduce large-area GPU backdrop sampling.
+   Keep focus, macOS Dock wave, app metadata, saved photo service and input unchanged.
+   Do not use permanent will-change layers on low-memory webOS 22. */
+#favorites{
+  background:linear-gradient(145deg,rgba(213,229,244,.34),rgba(32,48,68,.76));
+  backdrop-filter:blur(8px) saturate(1.10);
+  -webkit-backdrop-filter:blur(8px) saturate(1.10);
+}
+.navbtn,.close-library{
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.library{
+  background:linear-gradient(140deg,rgba(14,29,45,.975),rgba(25,34,54,.97));
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.dialog,.toast,.macSearchWrap{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+/* Avoid full-screen filter processing of nature/custom backgrounds. */
+#wallpaper{filter:none;}
+/* Focus title only: permit two lines rather than ellipsis/cropped app names. */
+#favorites .tile-title{
+  max-width:212px!important;
+  width:max-content;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.15;
+  overflow-wrap:break-word;
+}

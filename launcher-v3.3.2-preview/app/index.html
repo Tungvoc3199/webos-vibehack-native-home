@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>TV Home V3.3.2 · Native Dock + hình nền đa thiết bị</title>
+  <link rel="stylesheet" href="v2.css">
+  <link rel="stylesheet" href="macos.css">
+  <link rel="stylesheet" href="dock-v301.css">
+  <link rel="stylesheet" href="slim-v302.css">
+  <link rel="stylesheet" href="wave-v303.css">
+  <link rel="stylesheet" href="wallpaper-v31.css">
+  <link rel="stylesheet" href="dock-custom-v330.css">
+  <link rel="stylesheet" href="perf-v332.css">
+</head>
+<body>
+  <div id="wallpaper"></div><div id="shade"></div>
+  <main id="home">
+    <header class="topbar">
+      <section class="topclock">
+        <div id="greeting">CHÀO BUỔI TỐI</div>
+        <div class="clockline"><strong id="clock">17:30</strong><span id="date"></span></div>
+      </section>
+      <nav id="navigation" aria-label="Điều hướng">
+        <button type="button" class="navbtn" data-nav="inputs">Nguồn vào</button>
+        <button type="button" class="navbtn" data-nav="library">Tất cả ứng dụng</button>
+        <button type="button" class="navbtn" data-nav="settings">Cài đặt</button>
+      </nav>
+    </header>
+    <div class="brandline"><span class="eyebrow">TV HOME · NATIVE-INSPIRED EDITION</span><span class="brand-desc">Không gian giải trí của bạn</span><span class="macTagline">Bốn cảnh nền có sẵn · Chọn ảnh riêng từ điện thoại.</span></div>
+    <section id="favorites" aria-label="Ứng dụng yêu thích">
+      <div class="dock-heading"><h1>Yêu thích</h1><span>Giữ OK để quản lý ứng dụng</span></div>
+      <div id="favoriteItems" class="tiles"></div>
+    </section>
+  </main>
+  <section id="library" class="library hidden" aria-label="Thư viện ứng dụng">
+    <header class="library-heading">
+      <div><div class="eyebrow">THƯ VIỆN</div><h2>Tất cả ứng dụng</h2><p id="catalogNote"></p></div>
+      <button class="close-library" type="button">Đóng ✕</button>
+    </header>
+    <div class="macSearchWrap"><span class="searchIcon">⌕</span><input id="appSearch" type="search" autocomplete="off" placeholder="Tìm ứng dụng trong Launchpad…" aria-label="Tìm ứng dụng"></div>
+    <div id="appGrid" class="app-grid"></div>
+    <footer>OK: mở ứng dụng &nbsp; · &nbsp; Giữ OK: quản lý &nbsp; · &nbsp; Back: quay lại</footer>
+  </section>
+  <div id="dialogScrim" class="scrim hidden">
+    <section id="dialog" class="dialog" role="dialog" aria-modal="true">
+      <h2 id="dialogTitle">Tùy chọn</h2>
+      <p id="dialogDesc"></p>
+      <div id="dialogActions"></div>
+    </section>
+  </div>
+  <section id="wallpaperManager" class="wallpaper-v31 hidden" aria-label="Quản lý ảnh nền">
+    <h2>Kho hình nền TV Home</h2>
+    <p id="wallpaperHelp">Chọn nền có sẵn hoặc quét QR bằng bất kỳ điện thoại, máy tính bảng nào; có thể nhập IP TV trên trình duyệt.</p>
+    <div class="wallpaper-manager-content">
+      <div class="wallpaper-manager-options" id="wallpaperActions"></div>
+      <div class="wallpaper-manager-preview"><div id="wallpaperQr"></div><p id="wallpaperPairText"></p><img id="wallpaperPending" hidden alt="Xem trước ảnh mới"></div>
+    </div>
+    <div id="wallpaperStatus" role="status">Bốn hình nền có sẵn hoạt động cả khi TV không có Internet.</div>
+  </section>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="config.js"></script>
+  <script src="apps.js"></script>
+  <script src="catalog.js"></script>
+  <script src="wallpaper-presets.js"></script>
+  <script src="v2.js"></script>
+  <script src="macos.js"></script>
+  <script src="qr-generator.js"></script>
+  <script src="wallpaper-v31.js"></script>
+</body>
+</html>

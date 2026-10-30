@@ -1,0 +1,59 @@
+/* macOS-inspired glass skin for TV Home V3; no imported assets/services. */
+/* Preserves V2 layout, GIP, TV remote interaction and owner's family photo. */
+html,body{background:#07101b}
+#wallpaper{filter:saturate(.94) brightness(.92)}
+#shade{background:linear-gradient(180deg,rgba(6,17,31,.62),rgba(4,15,26,.1) 30%,rgba(6,13,24,.12) 62%,rgba(4,10,17,.74))}
+#macMenu{position:absolute;z-index:4;left:0;right:0;top:0;height:62px;padding:0 80px;display:flex;align-items:center;gap:34px;background:rgba(17,31,48,.37);border-bottom:1px solid rgba(255,255,255,.22);backdrop-filter:blur(30px) saturate(1.24);-webkit-backdrop-filter:blur(30px) saturate(1.24);box-shadow:0 6px 26px rgba(0,0,0,.08);font-size:23px;color:#f5f7fd;text-shadow:0 1px 7px #0007}
+#macMenu strong{font-size:25px;font-weight:730}
+#macMenu .macBrand{font-size:30px;color:#fff;font-weight:850;line-height:1}
+#macMenu .macMenuRight{margin-left:auto;font-size:18px;letter-spacing:.8px}
+.topbar{top:119px;left:95px;right:94px;align-items:flex-start}
+.topclock{width:610px}
+#greeting{margin:0 0 8px 4px;font-size:18px;letter-spacing:4px;opacity:.92}
+.clockline{display:block}
+#clock{display:block;font-weight:250;font-size:123px;letter-spacing:-6px;line-height:1.02;text-shadow:0 6px 24px #0008}
+#date{display:block;margin:8px 0 0 5px;font-size:29px;letter-spacing:.5px;font-weight:450;opacity:.94;text-transform:none}
+#navigation{gap:15px;align-items:center}
+.navbtn,.close-library{height:70px;min-height:70px;padding:0 25px;font-size:22px;font-weight:550;background:rgba(238,245,255,.20);border:1.5px solid rgba(255,255,255,.36);color:#fff;box-shadow:0 12px 28px rgba(0,0,0,.14),inset 0 1px rgba(255,255,255,.19);border-radius:20px;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);white-space:nowrap}
+.navbtn:focus,.navbtn.focused,.close-library.focused{background:rgba(244,248,255,.94);color:#162235;border-color:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.28),0 12px 35px #0004;outline:none}
+.brandline{top:385px;left:102px;max-width:690px;gap:5px}
+.brandline .eyebrow{letter-spacing:5px;font-size:17px;font-weight:650;color:#edf5ff;text-shadow:0 2px 8px #000}
+.brand-desc{font-size:49px;font-weight:360;letter-spacing:-1px;line-height:1.18}
+.macTagline{font-size:23px;color:rgba(255,255,255,.84);font-weight:430;text-shadow:0 2px 9px #0007;margin-top:7px}
+.macWidget{position:absolute;top:543px;left:103px;width:440px;height:165px;padding:20px 26px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(255,255,255,.24);border-radius:27px;background:linear-gradient(135deg,rgba(233,245,255,.24),rgba(223,235,255,.11));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 38px #0003,inset 0 1px #fff5;text-shadow:0 2px 7px #0007}
+.macWidgetLabel{font-size:13px;letter-spacing:3px;font-weight:700;color:#ebf4ff}
+.macWidgetText{font-size:30px;line-height:1.03;font-weight:450}
+.macWidgetBottom{font-size:14px;opacity:.86}
+#favorites{left:50%;right:auto;bottom:47px;width:1570px;max-width:calc(100% - 150px);transform:translateX(-50%);padding:27px 30px 18px;border-radius:39px;background:linear-gradient(147deg,rgba(230,239,250,.24),rgba(202,222,241,.15));border:1.7px solid rgba(255,255,255,.39);backdrop-filter:blur(35px) saturate(1.3);-webkit-backdrop-filter:blur(35px) saturate(1.3);box-shadow:0 25px 65px #0007,inset 0 2px rgba(255,255,255,.37)}
+.dock-heading{margin:0 3px 13px;align-items:center}
+.dock-heading h1{font-size:20px;letter-spacing:2px;text-transform:uppercase;font-weight:660;color:#f4f7ff;text-shadow:0 1px 7px #0008}
+.dock-heading span{font-size:18px;color:#e7edf5;text-shadow:0 1px 7px #0009}
+.tiles{display:flex;gap:20px;min-height:0;justify-content:center;align-items:stretch}
+#favorites .tile{width:calc((100% - 80px)/5);flex:0 1 auto}
+#favorites .tile .tile-image{border-radius:23px;border:1.5px solid #fff7;aspect-ratio:360/202;box-shadow:0 8px 23px #0005,0 1px 2px #fff6}
+.tile-image{box-shadow:0 5px 20px #0005}
+#favorites .tile.focused .tile-image{transform:translateY(-7px) scale(1.08);border:3px solid #fff;box-shadow:0 0 0 5px rgba(255,255,255,.28),0 23px 33px #0008}
+#favorites .tile-title{margin-top:13px;font-size:20px;font-weight:540;text-align:center;letter-spacing:0}
+#favorites .tile-library{background:linear-gradient(132deg,#243c56,#374663);font-size:56px}
+#favorites .tile-library .library-icon{color:#d8ebff}
+.library{padding:94px 105px 28px;background:linear-gradient(140deg,rgba(14,29,45,.89),rgba(25,34,54,.87));backdrop-filter:blur(35px) saturate(1.1);-webkit-backdrop-filter:blur(35px) saturate(1.1);z-index:5}
+.library-heading{margin-bottom:24px}
+.library-heading h2{font-size:65px;letter-spacing:-2px;font-weight:450}
+.library-heading .eyebrow{font-size:18px;letter-spacing:5px}
+.library-heading p{font-size:20px;color:#d1ddec}
+.macSearchWrap{position:relative;width:860px;height:64px;margin:0 auto 24px;display:flex;align-items:center;background:rgba(240,246,255,.16);border:1.4px solid rgba(255,255,255,.25);border-radius:20px;backdrop-filter:blur(20px)}
+.macSearchWrap .searchIcon{font-size:35px;padding-left:24px;opacity:.9;line-height:1}
+#appSearch{min-width:0;width:100%;height:100%;font:400 25px Outfit,Arial,sans-serif;border:0;outline:0;color:#fff;background:transparent;padding:0 24px}
+#appSearch::placeholder{color:rgba(245,250,255,.75)}
+.macSearchWrap:focus-within{box-shadow:0 0 0 3px rgba(232,245,255,.4)}
+.app-grid{height:645px;grid-template-columns:repeat(5,1fr);gap:22px 25px;scrollbar-width:thin}
+.app-grid .tile{width:100%}
+.app-grid .tile-image{aspect-ratio:360/202;border-radius:23px;background:rgba(30,42,58,.7);border:1.5px solid rgba(255,255,255,.25)}
+.app-grid .tile.focused .tile-image{transform:scale(1.04);border:3px solid #fff;box-shadow:0 0 0 5px rgba(255,255,255,.3),0 16px 30px #0009}
+.app-grid .tile-title{margin-top:9px;font-size:19px;font-weight:500}
+.app-grid .tile-flag{font-size:14px}
+.library footer{font-size:21px;margin-top:15px;color:#dae5f2}
+.dialog{background:linear-gradient(144deg,rgba(44,58,77,.98),rgba(24,37,55,.98));backdrop-filter:blur(30px);border:1.5px solid rgba(255,255,255,.32);box-shadow:0 30px 120px #000b}
+.dialog h2{font-size:47px;font-weight:520}
+.dialog-action{border-radius:17px;font-size:25px;padding:18px 24px}
+.toast{background:rgba(29,44,64,.95);border:1px solid #fff4;backdrop-filter:blur(15px)}

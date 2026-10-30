@@ -1,0 +1,39 @@
+{
+  "version": "nature-cc0-replacement-v328",
+  "size": "1920x1080",
+  "license": "CC0-1.0",
+  "files": {
+    "aurora_lake.jpg": {
+      "bytes": 817204,
+      "sha256": "ef4e5d4778a67fbf3820debdf14895fb07e388f621a7828a1416d8adc765de79",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Mountain_lake_(Unsplash).jpg",
+      "sourceFile": "Mountain lake (Unsplash).jpg",
+      "author": "Aleksandra Boguslawska",
+      "license": "CC0 1.0"
+    },
+    "sunrise_ocean.jpg": {
+      "bytes": 566603,
+      "sha256": "b67cd116ece5dd888e73e2c985be690b58aa4f8f2e2c0774eed0a163e5d86521",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sunset_over_the_sea_near_Sozopol.jpg",
+      "sourceFile": "Sunset over the sea near Sozopol.jpg",
+      "author": "Ivano Giambattista",
+      "license": "CC0 1.0"
+    },
+    "misty_mountains.jpg": {
+      "bytes": 380588,
+      "sha256": "fbf111829c8e7dcf615521530fd7d98614422618a1800a54964b85373a0a87eb",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Foggy_Hills_(Unsplash).jpg",
+      "sourceFile": "Foggy Hills (Unsplash).jpg",
+      "author": "Tobias Tullius",
+      "license": "CC0 1.0"
+    },
+    "amber_teal.jpg": {
+      "bytes": 781952,
+      "sha256": "2594ae0810598d24367a8349c4e99b9aec37b1996e3f2a3488dfc0a028e5e833",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Waterfall_in_forest.jpg",
+      "sourceFile": "Waterfall in forest.jpg",
+      "author": "Martin Eklund",
+      "license": "CC0 1.0"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "com.gathin.tvhome.wallpaper",
+  "version": "3.3.2",
+  "description": "TV Home private LAN wallpaper receiver",
+  "main": "index.js",
+  "private": true,
+  "license": "UNLICENSED"
+}

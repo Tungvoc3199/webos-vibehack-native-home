@@ -1,0 +1,56 @@
+/* V3.0.1 — TV-first floating macOS-style dock refresh.
+   No system services, no Home hook. Preserves V3 app actions and personal photo.
+   Fixed 1920x1080 design coordinate system used by existing webOS launcher. */
+#macMenu{display:none!important}
+html,body{background:#07111b}
+.topbar{top:64px;left:88px;right:88px;align-items:flex-start}
+.topclock{width:650px}
+#greeting{font-size:20px;letter-spacing:4px;margin:0 0 8px 3px}
+#clock{font-size:128px;line-height:1.02;letter-spacing:-7px;font-weight:250}
+#date{font-size:30px;margin-top:8px}
+#navigation{gap:16px}
+.navbtn{height:76px;min-height:76px;font-size:24px;font-weight:560;padding:0 29px;border-radius:21px;background:rgba(18,28,40,.50);border:1.5px solid rgba(255,255,255,.5);box-shadow:0 9px 24px rgba(0,0,0,.18)}
+.navbtn.focused,.navbtn:focus{background:#f6fbff;color:#142235;outline:none;box-shadow:0 0 0 5px rgba(255,255,255,.3),0 9px 30px rgba(0,0,0,.25)}
+.brandline{top:374px;left:94px;max-width:770px;gap:8px}
+.brandline .eyebrow{font-size:20px;letter-spacing:4.5px}
+.brand-desc{font-size:53px;font-weight:350;line-height:1.15}
+.macTagline{font-size:25px;line-height:1.3;max-width:700px}
+.macWidget{display:none!important}
+/* Glass dock: icons are square and large, unlike the old 16:9 banner carousel */
+#favorites{
+ position:absolute;left:50%;right:auto;bottom:36px;transform:translateX(-50%);
+ width:max-content;max-width:calc(100% - 110px);min-width:0;
+ padding:23px 28px 19px;border-radius:42px;
+ background:linear-gradient(145deg,rgba(220,236,251,.22),rgba(52,69,86,.52));
+ border:2px solid rgba(255,255,255,.48);
+ box-shadow:0 24px 65px rgba(0,0,0,.55),inset 0 2px rgba(255,255,255,.32);
+ backdrop-filter:blur(32px) saturate(1.35);
+ -webkit-backdrop-filter:blur(32px) saturate(1.35);
+}
+#favorites .dock-heading{display:none}
+#favorites .tiles{display:flex;align-items:flex-start;justify-content:center;gap:23px;min-height:0}
+#favorites .tile{width:204px;min-width:204px;max-width:204px;flex:0 0 204px}
+#favorites .tile-image{
+ height:204px;width:204px;aspect-ratio:1/1;
+ background:linear-gradient(145deg,#283e57,#15273f);
+ border-radius:34px;border:2px solid rgba(255,255,255,.47);
+ box-shadow:0 12px 24px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.34);
+ display:flex;align-items:center;justify-content:center;overflow:hidden;
+ transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;
+}
+#favorites .tile-image img{display:block;width:100%;height:100%;padding:12px;object-fit:contain;object-position:center}
+#favorites .tile[data-id="youtube.leanback.v4"] .tile-image{background:linear-gradient(145deg,#ff3642,#ba101b)}
+#favorites .tile[data-id="com.vtvgotv.app"] .tile-image{background:linear-gradient(145deg,#f53e51,#a61637)}
+#favorites .tile[data-id="com.fpt.fptplay"] .tile-image{background:linear-gradient(145deg,#ffb34c,#f4691c)}
+#favorites .tile[data-id="vieplay.vn"] .tile-image{background:linear-gradient(145deg,#29de55,#087b31)}
+#favorites .tile[data-id="netflix"] .tile-image{background:linear-gradient(145deg,#24262d,#0a0d15)}
+#favorites .tile-library{background:linear-gradient(145deg,#8cb8ea,#33517d)}
+#favorites .tile-library .library-icon{font-size:95px;font-weight:330;line-height:1;color:#f8fcff;text-shadow:0 2px 10px #0006}
+#favorites .tile-title{font-size:21px;font-weight:570;line-height:1.18;margin-top:16px;max-width:204px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 2px 8px #000b}
+#favorites .tile.focused .tile-image{
+ transform:translateY(-13px) scale(1.075);border:4px solid #fff;
+ box-shadow:0 0 0 6px rgba(255,255,255,.30),0 22px 43px #0009
+}
+#favorites .tile.focused .tile-title{color:#fff;font-weight:700;text-shadow:0 2px 8px #000}
+#favorites .tile:focus-visible{outline:none}
+.library{z-index:5}
