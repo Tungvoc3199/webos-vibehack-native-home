@@ -34,6 +34,7 @@
   var dialogItems = [], dialogIndex = 0, lastZone = 'home';
   var dialogType = '', dialogApp = null, okDown = false, okTimer = null;
   var holdFired = false;
+  var dockReorder = null; // {id, original} until confirmed with OK; no persistent writes mid-move.
   var nav = Array.prototype.slice.call(document.querySelectorAll('.navbtn'));
   var homeTiles = [], libraryTiles = [], dockHover=-1, dockPointerX=null, dockFrame=0;
   var dockReduceMotion=!!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -101,6 +102,7 @@
     el.appendChild(face);el.appendChild(div('tile-title',dockTitle));
     el.addEventListener('click',function () {
       if (zone==='modal')return;
+      if (dockReorder)return; // No accidental app launches while carrying a Dock icon.
       if (!a)openLibrary();
       else launch(a.id,a.title);
     });
@@ -127,6 +129,7 @@
       });
     });
     if (zone==='home')focus();
+    highlightDockReorder();
   }
   function renderLibrary() {
     var root=$('appGrid');root.textContent='';libraryTiles=[];
@@ -204,6 +207,7 @@
     if (zone==='modal') el=document.querySelectorAll('.dialog-action')[dialogIndex];
     if (el) {el.classList.add('focused');if(zone==='library')el.scrollIntoView({block:'nearest',behavior:'auto'});}
     applyDockWave();
+    highlightDockReorder();
   }
   function openLibrary() {
     libOpen=true;$('library').classList.remove('hidden');
@@ -244,8 +248,7 @@
     var choices=[
       {label:'Mở '+a.title,act:'open'},
       {label:fav?'Bỏ ghim khỏi Home':'Ghim ra Home',act:'pin'},
-      {label:'Chuyển sang trái trên Dock',act:'move-left',disabled:!fav||pref.favorites.indexOf(a.id)===0},
-      {label:'Chuyển sang phải trên Dock',act:'move-right',disabled:!fav||pref.favorites.indexOf(a.id)===pref.favorites.length-1},
+      {label:'Sắp xếp icon trên Dock (← →, OK để lưu)',act:'move-dock',disabled:!fav},
       {label:hidden?'Hiện lại trên Home':'Ẩn khỏi Home',act:'hide'},
       {label:'Thông tin và hướng dẫn gỡ ứng dụng',act:'uninstall-help'},
       {label:'Đóng',act:'close'}];
@@ -277,24 +280,9 @@
     var app=dialogApp;
     if(action==='close')return closeDialog();
     if(action==='open' && app){closeDialog();return launch(app.id,app.title);}
-    if((action==='move-left'||action==='move-right') && app) {
-      var at=pref.favorites.indexOf(app.id);
-      if(at<0){closeDialog();toast('Ứng dụng chưa được ghim vào Dock');return;}
-      var next=at+(action==='move-left'?-1:1);
-      if(next<0||next>=pref.favorites.length)return;
-      var other=pref.favorites[next];
-      pref.favorites[next]=app.id;
-      pref.favorites[at]=other;
-      store();
-      var returned=lastZone;
+    if(action==='move-dock' && app) {
       closeDialog();
-      if(returned==='home'){
-        // Preserve keyboard focus on the moved app rather than its old slot.
-        index=homeTiles.findIndex(function(t){return t.dataset.id===app.id;});
-        if(index<0)index=0;
-        focus();
-      }
-      toast('Đã đổi vị trí '+app.title+' trên Dock');
+      startDockReorder(app);
       return;
     }
     if(action==='pin' && app) {
@@ -390,6 +378,53 @@
     }
     focus();
   }
+  function highlightDockReorder(){
+    var band=$('favorites');
+    if(band)band.classList.toggle('dock-reordering',!!dockReorder);
+    homeTiles.forEach(function(el){
+      el.classList.toggle('dock-moving',!!dockReorder && el.dataset.id===dockReorder.id);
+    });
+  }
+  function startDockReorder(app){
+    if(!app || pref.favorites.indexOf(app.id)<0 || pref.hidden.indexOf(app.id)>=0) {
+      toast('Chỉ sắp xếp ứng dụng đã ghim trên Dock');return;
+    }
+    if(dockReorder)return;
+    // App-menu flow closes before entering movement mode.
+    if(zone==='modal')closeDialog();
+    if(libOpen)closeLibrary();
+    zone='home';
+    dockReorder={id:app.id,original:pref.favorites.slice()};
+    index=homeTiles.findIndex(function(el){return el.dataset.id===app.id;});
+    if(index<0){dockReorder=null;highlightDockReorder();return;}
+    dockPointerX=null;dockHover=-1;
+    focus();
+    toast('← → Di chuyển liên tục · OK lưu · Back hủy');
+  }
+  function shiftDockReorder(direction){
+    if(!dockReorder)return;
+    var at=pref.favorites.indexOf(dockReorder.id),target=at+direction;
+    if(at<0 || target<0 || target>=pref.favorites.length)return;
+    var other=pref.favorites[target];
+    pref.favorites[target]=dockReorder.id;
+    pref.favorites[at]=other;
+    dockHover=-1;dockPointerX=null;
+    renderHome(); // No store() until OK commits.
+    index=homeTiles.findIndex(function(el){return el.dataset.id===dockReorder.id;});
+    focus();
+  }
+  function finishDockReorder(confirm){
+    if(!dockReorder)return;
+    var id=dockReorder.id;
+    if(!confirm)pref.favorites=dockReorder.original.slice();
+    dockReorder=null;
+    if(confirm)store();
+    renderHome();
+    index=homeTiles.findIndex(function(el){return el.dataset.id===id;});
+    if(index<0)index=0;
+    focus();
+    toast(confirm?'Đã lưu vị trí icon trên Dock':'Đã hủy, Dock giữ nguyên');
+  }
   function clickFocused(){
     if(zone==='modal')return activateDialog();
     if(zone==='top')return navActivate();
@@ -404,6 +439,7 @@
   }
   function returnToDockAfterRelaunch(){
     // Only app-local recovery: cannot prevent the native LG Home compositor flash.
+    if(dockReorder)finishDockReorder(false);
     if(window.WALLPAPER_V31&&window.WALLPAPER_V31.isOpen())window.WALLPAPER_V31.close();
     if(zone==='modal'){
       $('dialogScrim').classList.add('hidden');
@@ -416,7 +452,7 @@
   var hasBeenHidden=false,lastReentryAt=0;
   function appReentry(){
     var now=Date.now();
-    if(now-lastReentryAt<500 && zone==='home' && !libOpen &&
+    if(!dockReorder && now-lastReentryAt<500 && zone==='home' && !libOpen &&
        !(window.WALLPAPER_V31&&window.WALLPAPER_V31.isOpen()))return;
     lastReentryAt=now;
     returnToDockAfterRelaunch();
@@ -424,13 +460,20 @@
   window.addEventListener('webOSRelaunch',appReentry);
   document.addEventListener('webOSRelaunch',appReentry);
   document.addEventListener('visibilitychange',function(){
-    if(document.hidden){hasBeenHidden=true;return;}
+    if(document.hidden){hasBeenHidden=true;if(dockReorder)finishDockReorder(false);return;}
     if(hasBeenHidden){hasBeenHidden=false;appReentry();}
   });
   document.addEventListener('keydown',function(e){
     var k=e.keyCode;
     if(window.WALLPAPER_V31&&window.WALLPAPER_V31.isOpen())return;
     if([13,37,38,39,40,461,27,8].indexOf(k)<0)return;
+    if(dockReorder){
+      e.preventDefault();e.stopPropagation();
+      if(k===37||k===39)shiftDockReorder(k===37?-1:1);
+      else if(k===13 && !okDown){okDown=true;holdFired=true;finishDockReorder(true);}
+      else if(k===461||k===27||k===8)finishDockReorder(false);
+      return;
+    }
     // On the root Home, let webOS handle Back itself. Never trap user in V2.
     if((k===461||k===27||k===8) && zone!=='modal' && !libOpen) return;
     e.preventDefault();e.stopPropagation();
@@ -446,7 +489,9 @@
       if(zone==='home'||zone==='library'){
         var selected=focusedApp();
         if(selected)okTimer=setTimeout(function(){
-          holdFired=true;okTimer=null;openAppMenu(selected);
+          holdFired=true;okTimer=null;
+          if(zone==='home' && pref.favorites.indexOf(selected.id)>=0)startDockReorder(selected);
+          else openAppMenu(selected);
         },650);
       }
       return;
@@ -482,7 +527,7 @@
   document.querySelector('.close-library').addEventListener('click',closeLibrary);
   window.V2_DEBUG={
     prefs:function(){return JSON.parse(JSON.stringify(pref));},
-    state:function(){return {zone:zone,libOpen:libOpen,index:index};},
+    state:function(){return {zone:zone,libOpen:libOpen,index:index,reordering:!!dockReorder,movingId:dockReorder?dockReorder.id:null};},
     openLibrary:openLibrary,
     showSettings:openSettings,
     clickFocused:clickFocused,

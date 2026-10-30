@@ -1,0 +1,7 @@
+/* V3.3.3: clearly indicate the carried Dock tile. No continuous GPU effects. */
+#favorites.dock-reordering {outline:2px solid rgba(255,211,95,.92);outline-offset:4px;}
+#favorites .tile.dock-moving .tile-image {
+  border:3px solid #ffd35f!important;
+  box-shadow:0 0 0 5px rgba(255,211,95,.30),0 12px 28px rgba(0,0,0,.55)!important;
+}
+#favorites .tile.dock-moving .tile-title {color:#ffe9b0!important;font-weight:750;}

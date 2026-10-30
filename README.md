@@ -1,6 +1,6 @@
-# LG webOS Projects — TV Home V3.3.2 Source Preview
+# LG webOS Projects — TV Home V3.3.3 Source Preview
 
-**Latest TV Home source: [V3.3.2 launcher candidate](launcher-v3.3.2-preview/README.md).** Published source-only, **not an installable package**. It passed 10/10 offline test suites, but deployment was interrupted; the physical TV still runs V3.3.1. No native Home / boot / Input Hook modifications are part of this update.
+**Latest TV Home source: [V3.3.3 launcher candidate](launcher-v3.3.3-preview/README.md).** Published source-only, **not an installable package**. It passed 10/10 offline test suites, including continuous Dock reordering with OK/Left/Right/Back; the physical TV still runs V3.3.1. No native Home / boot / Input Hook modifications are part of this update.
 
 The native Home hook below is a separate, security-held experimental component. **Do not install or enable it** until its outstanding safety issues are resolved.
 

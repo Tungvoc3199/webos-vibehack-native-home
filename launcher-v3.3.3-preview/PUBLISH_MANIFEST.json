@@ -1,7 +1,10 @@
 {
-  "appVersion": "3.3.2",
-  "mode": "source-only-preview",
-  "sourceFiles": [
+  "latestAppVersion": "3.3.3",
+  "publicationMode": "source-only-preview-not-installable",
+  "tvInstalledVersion": "3.3.1",
+  "newBehavior": "long OK to pick up Dock app, repeat arrows, OK commit, Back cancel; short OK launches",
+  "testSummary": "10/10 UI suites PASS; real Node12 receiver PASS; webOS SDK --check PASS",
+  "files": [
     "app/LICENSE_QR_GENERATOR.txt",
     "app/app.js",
     "app/appinfo.json",
@@ -9,6 +12,7 @@
     "app/catalog.js",
     "app/config.js",
     "app/dock-custom-v330.css",
+    "app/dock-reorder-v333.css",
     "app/dock-v301.css",
     "app/fonts/OFL.txt",
     "app/index.html",
@@ -41,19 +45,17 @@
     "tests/test_v332_async_health_race.py",
     "tests/test_v332_health_gate.py",
     "tests/test_v332_hung_heartbeat.py",
-    "tests/test_v332_late_pair_gate.py"
+    "tests/test_v332_late_pair_gate.py",
+    "tests/test_v333_continuous_dock.py"
   ],
+  "notARelease": true,
   "excluded": [
-    "original third-party app icons",
-    "wallpaper jpeg assets",
-    "custom personal photos",
-    "IPK",
-    "private host installation scripts",
-    "logs",
-    "node_modules binaries",
-    "font binary"
-  ],
-  "tvInstalled": "3.3.1",
-  "offlineTests": "10/10 PASS private full candidate",
-  "publicRelease": false
+    "third-party image/icon files",
+    "wallpaper JPEG files",
+    "Outfit font binary",
+    "vendored dependencies",
+    "compiled IPK",
+    "root installers",
+    "TV/photo personal data"
+  ]
 }

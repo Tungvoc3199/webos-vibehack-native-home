@@ -4,9 +4,9 @@
 'use strict';
 const cp=require('child_process'),fs=require('fs'),os=require('os'),path=require('path'),
       http=require('http'),assert=require('assert');
-const NODE12='F:\\TV-LG\\vibehack\\candidate\\node12-compat-offline-20261029\\node-v12.21.0-win-x64\\node.exe';
+const NODE12=process.env.NODE12_PATH||'node';
 const dir=fs.mkdtempSync(path.join(os.tmpdir(),'v327-node12-'));
-const port=18982,root=__dirname;
+const port=18982,root=path.resolve(__dirname,'..');
 const jpg=fs.readFileSync(path.join(root,'app/wallpapers/presets/aurora_lake.jpg'));
 const ctl='b'.repeat(64);
 let child=null;
@@ -52,7 +52,7 @@ function call(method,url,body,extra={}){
   }
   await start(true);
   const health=await call('GET','/tv/health',null,tv);
-  assert.equal(health.status,200);assert.equal(health.body.version,'3.3.2');
+  assert.equal(health.status,200);assert.equal(health.body.version,'3.3.3');
   const p=await call('POST','/tv/pair',null,tv);assert.equal(p.status,200);
   const upload=await call('POST','/upload?t='+p.body.token,jpg,{
    Origin:'http://127.0.0.1:'+port,'Content-Type':'image/jpeg','X-Pair-Code':p.body.code});

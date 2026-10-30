@@ -23,23 +23,19 @@ with sync_playwright() as p:
  assert page.locator("#appGrid .tile[data-id='"+adfree+"'] .yt-adfree-tag").inner_text()=="ADFREE"
  print("DUAL_YOUTUBE_DISTINCT_BADGE_ALWAYS_VISIBLE_PASS",flush=True)
  page.screenshot(path=str(r/"V330_DOCK_ADFREE_1920x1080.png"))
- # Long OK on pinned AdFree: emulate keyDown + >650ms to bring up context menu.
- page.evaluate("""() => {
-   let ids=Array.from(document.querySelectorAll('#favoriteItems .tile'));
-   let i=ids.findIndex(x=>x.dataset.id==='youtube.leanback.v4.webos22');
-   document.dispatchEvent(new KeyboardEvent('keydown',{keyCode:39,bubbles:false})); // ignored no longer needed
-   window.V2_DEBUG.relaunchHome();
- }""")
- # Remote arrow keys move focus to AdFree; long OK opens menu.
+ # Move focus to AdFree; long OK now directly picks up icon.
  for _ in range(start.index(adfree)):page.keyboard.press("ArrowRight")
  page.keyboard.down("Enter");page.wait_for_timeout(720);page.keyboard.up("Enter")
- assert page.locator("#dialogScrim").is_visible()
- assert page.get_by_role("button",name="Chuyển sang trái trên Dock").count()==1
- assert page.get_by_role("button",name="Chuyển sang phải trên Dock").count()==1
- page.get_by_role("button",name="Chuyển sang trái trên Dock").click()
+ assert page.evaluate("window.V2_DEBUG.state().reordering") is True
+ assert page.locator("#dialogScrim").is_hidden()
+ page.keyboard.press("ArrowLeft")
+ page.keyboard.press("ArrowLeft")
+ assert ids().index(adfree)==start.index(adfree)-2
+ page.keyboard.press("Enter") # commit once
+ assert page.evaluate("window.V2_DEBUG.state().reordering") is False
  after=ids()
- assert after.index(adfree)==start.index(adfree)-1,(after,start)
- assert page.evaluate("JSON.parse(localStorage.getItem('tvhome.v2.preferences')).favorites").index(adfree)==start.index(adfree)-1
+ assert after.index(adfree)==start.index(adfree)-2,(after,start)
+ assert page.evaluate("JSON.parse(localStorage.getItem('tvhome.v2.preferences')).favorites").index(adfree)==start.index(adfree)-2
  print("MAGIC_REMOTE_DOCK_SWAP_LEFT_AND_SAVE_PASS",flush=True)
  page.reload();page.wait_for_timeout(100)
  assert ids()==after,(ids(),after)

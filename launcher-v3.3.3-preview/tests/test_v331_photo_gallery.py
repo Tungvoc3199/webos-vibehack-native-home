@@ -1,4 +1,4 @@
-"""V3.3.2 Playwright: 4 presets, Any Device instructions, owner confirmed deletion.
+"""V3.3.3 Playwright: 4 presets, Any Device instructions, owner confirmed deletion.
 Real network and TV are NOT contacted; explicit fetch mocks.
 """
 from pathlib import Path
@@ -17,7 +17,7 @@ window.__photos=[
 {id:'222222222222222222222222',name:'Two'}];
 window.fetch=async function(url,opts){
  const p=String(url);let data={ok:true};let code=200;
- if(p.includes('/tv/health')) data={ok:true,version:'3.3.2'};
+ if(p.includes('/tv/health')) data={ok:true,version:'3.3.3'};
  else if(p.includes('/tv/active')) data={ok:true,active:window.__photos[0]?.id||'',photos:window.__photos};
  else if(p.includes('/tv/delete-all')) {
    window.__tvDeleteCalls++;window.__tvDeletedIds=window.__photos.map(x=>x.id);
