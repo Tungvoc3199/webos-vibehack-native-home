@@ -1,3 +1,11 @@
+# LG webOS Projects — TV Home V3.3.2 Source Preview
+
+**Latest TV Home source: [V3.3.2 launcher candidate](launcher-v3.3.2-preview/README.md).** Published source-only, **not an installable package**. It passed 10/10 offline test suites, but deployment was interrupted; the physical TV still runs V3.3.1. No native Home / boot / Input Hook modifications are part of this update.
+
+The native Home hook below is a separate, security-held experimental component. **Do not install or enable it** until its outstanding safety issues are resolved.
+
+---
+
 # Native Home for LG webOS (rooted TVs)
 
 **SECURITY HOLD — DO NOT INSTALL OR ENABLE THIS VERSION.** Independent Codex review on 2026-10-22 identified a Critical root-level symlink/config trust flaw plus High-severity rollback/mount-validation defects. The scripts remain available for code review only until fixed and re-reviewed. This is NOT firmware and will NOT root your TV.
