@@ -1,0 +1,21 @@
+# Unreviewed binary packages and personal files must never be committed.
+node_modules/
+dist/
+*.ipk
+*.zip
+*.tar.gz
+*.log
+*.pem
+*.key
+.env
+.env.*
+*.sqlite*
+/app/wallpapers/custom.jpg
+/app/wallpapers/*.jpg
+/app/dock-icons/
+/app/banners/
+/app/icons/
+/app/fonts/
+/app/icon.png
+/app/largeIcon.png
+__pycache__/

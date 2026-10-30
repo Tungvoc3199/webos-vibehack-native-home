@@ -1,0 +1,1 @@
+window.CONFIG={wallpaperDefault:"custom",dockApps:["youtube.leanback.v4","com.fpt.fptplay","vieplay.vn","com.viettel.media.tv360"],hiddenApps:["com.gathin.tvhome","com.webos.app.livetv","com.webos.app.hdmi1","com.webos.app.hdmi2","com.webos.app.hdmi3","com.webos.app.hdmi4","com.webos.app.lgchannels","shortcutcopilot"],liveTvApp:"com.webos.app.livetv",columns:4};

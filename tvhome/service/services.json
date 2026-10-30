@@ -1,0 +1,22 @@
+{
+    "id":  "com.gathin.tvhome.wallpaper",
+    "description":  "Local wallpaper receiver (LAN, pairing)",
+    "services":  [
+                     {
+                         "name":  "com.gathin.tvhome.wallpaper",
+                         "description":  "Self-service family wallpaper receiver",
+                         "commands":  [
+                                          {
+                                              "name":  "start",
+                                              "description":  "Start LAN pairing receiver",
+                                              "public":  false
+                                          },
+                                          {
+                                              "name":  "stop",
+                                              "description":  "Bounded app-owned shutdown for safe rollback",
+                                              "public":  false
+                                          }
+                                      ]
+                     }
+                 ]
+}

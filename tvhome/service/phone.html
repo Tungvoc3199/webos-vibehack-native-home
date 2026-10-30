@@ -1,0 +1,19 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gửi ảnh đến Apple TV Lite</title>
+<style>body{background:#0b1522;color:#fff;font-family:system-ui;margin:0;padding:24px}
+main{max-width:570px;margin:20px auto;background:#1a2a40;padding:28px;border:1px solid #53677e;border-radius:26px}
+h1{font-size:28px;line-height:1.2}p{line-height:1.5;color:#c5d4e5}input{width:100%;font-size:18px;margin:22px 0}
+img{width:100%;max-height:265px;object-fit:contain;margin:5px 0 20px}
+button{background:#ff7045;color:#fff;font:600 19px system-ui;padding:16px 25px;border:0;border-radius:14px}
+button:disabled{opacity:.55}#status{white-space:pre-line}</style></head>
+<body><main><h1>Ảnh nền TV Home</h1>
+<p>Chọn ảnh từ iPhone, tự chỉnh về khung 16:9 rồi lưu vào bộ nhớ trong TV sau khi bạn xác nhận <b>Áp dụng</b>. <b>Hướng dẫn qua IP:</b> Trên TV mở Cài đặt → Kho hình nền → Nhận ảnh để xem địa chỉ LAN và mã PIN. Trên iPhone cùng Wi-Fi, nhập địa chỉ đó vào Safari (ví dụ http://192.168.x.x:8765/), chọn ảnh, nhập PIN 6 số, nhấn Gửi. Trở lại TV chọn Áp dụng. Sau đó có thể chọn lại trong Thư viện ảnh đã lưu, không cần gửi lại.</p>
+<input type="file" id="file" accept="image/*">
+<label for="code">Nhập mã 6 số đang hiển thị trên TV:</label>
+<input type="text" id="code" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]{6}" placeholder="Mã 6 số">
+<img id="preview" hidden alt="Xem trước ảnh">
+<button id="send">Gửi ảnh lên TV</button>
+<p id="status">Chưa chọn ảnh.</p>
+<p>Không dùng máy chủ Internet. Mã PIN có hiệu lực 15 phút; nếu hết hạn, chọn Nhận ảnh mới trên TV để cấp mã khác. Có thể lưu địa chỉ trang này vào dấu trang Safari để lần sau không cần quét QR.</p>
+</main><script src="/phone.js"></script></body></html>

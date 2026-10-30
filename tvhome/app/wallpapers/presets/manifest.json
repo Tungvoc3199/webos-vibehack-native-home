@@ -1,0 +1,22 @@
+{
+  "source": "Locally generated alternatives with same four approved themes; not byte-identical to ChatGPT ZIP",
+  "size": "1920x1080",
+  "files": {
+    "aurora_lake.jpg": {
+      "sha256": "0b2354198f81e7b293b6e31a48b57f46ad21ae79225a0ab4b78f8c92a6f7e51d",
+      "bytes": 74066
+    },
+    "sunrise_ocean.jpg": {
+      "sha256": "3fc32c7accf79298025c6bdac4d7f869621b59e040233f7e117a1a58822c6163",
+      "bytes": 111311
+    },
+    "misty_mountains.jpg": {
+      "sha256": "49d761aaf8a386a0648d4c046f42d859e121d83b820163fdf3339959b4d42242",
+      "bytes": 51007
+    },
+    "amber_teal.jpg": {
+      "sha256": "b7001c7a9de2229d69000ba0ac3335eb75ccf7284f412cee9768b847f96aa143",
+      "bytes": 88396
+    }
+  }
+}

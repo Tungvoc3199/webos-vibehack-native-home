@@ -1,0 +1,19 @@
+{
+  "version": "3.2.6",
+  "phase": "PUBLIC_SOURCE_ONLY_DRAFT_REVIEW_NOT_RELEASE",
+  "localIPK_SHA256": "ecefbd13453f0fa1d539d708b390740abef30d9cd2bc3b7a3e0d12934ef7aa01",
+  "sourcePackageBytesVerified": true,
+  "wallpapers": 4,
+  "ownerFamilyPhotoIncluded": false,
+  "independentReview": "BLOCK_P0_0_P1_6",
+  "reviewDate": "2026-10-29",
+  "physicalTVTests": "NOT_PERFORMED",
+  "thirdPartyMediaRights": "UNCLEARED",
+  "photoPrivacy": "HTTP_ON_LAN_P1",
+  "storedPhotoDeletion": "MISSING_P1",
+  "healthVersionMismatch": "P1",
+  "packageMode": "MODE_0666_0777_P1",
+  "commercialRelease": "NO_GO",
+  "publicBinaryRelease": "NO_GO",
+  "mainUntouched": true
+}
